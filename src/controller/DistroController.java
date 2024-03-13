@@ -36,12 +36,12 @@ public class DistroController {
 				
 				while (linha != null) {
 					
-					if (linha.contains("VERSION=")) {
+					if (linha.contains("VERSION")&&!(linha.contains("PRETTY"))) {
 						
 						System.out.println(linha);
 						
 					}
-					else if (linha.contains("NAME=")) {
+					else if (linha.contains("NAME")&&!(linha.contains("CODE"))) {
 						
 						System.out.println(linha);
 						
