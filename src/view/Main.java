@@ -21,6 +21,7 @@ public class Main {
 			switch (opc) {
 			case 1:
 				
+				distro.exibeDistro();
 				break;
 				
 			case 9:

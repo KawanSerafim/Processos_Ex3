@@ -21,38 +21,49 @@ public class DistroController {
 	
 	public void exibeDistro() {
 		
-		try {
-			
-			Process p = Runtime.getRuntime().exec("cat /etc/os-release");
-			InputStream fluxo = p.getInputStream();
-			InputStreamReader leitor = new InputStreamReader(fluxo);
-			BufferedReader buffer = new BufferedReader(leitor);
-			
-			String linha = buffer.readLine();
-			
-			while (linha != null) {
+		String nomeOS = os();
+		
+		if (nomeOS.contains("Linux")) {
+		
+			try {
 				
-				if (linha.contains("VERSION=")) {
+				Process p = Runtime.getRuntime().exec("cat /etc/os-release");
+				InputStream fluxo = p.getInputStream();
+				InputStreamReader leitor = new InputStreamReader(fluxo);
+				BufferedReader buffer = new BufferedReader(leitor);
+				
+				String linha = buffer.readLine();
+				
+				while (linha != null) {
 					
-					System.out.println(linha);
+					if (linha.contains("VERSION=")) {
+						
+						System.out.println(linha);
+						
+					}
+					else if (linha.contains("NAME=")) {
+						
+						System.out.println(linha);
+						
+					}
+					
+					linha = buffer.readLine();
 					
 				}
-				else if (linha.contains("NAME=")) {
-					
-					System.out.println(linha);
-					
-				}
+			
+			} catch (IOException e) {
 				
-				linha = buffer.readLine();
-				
+				e.printStackTrace();
+			
 			}
 		
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		
 		}
-		
+		else {
+			
+			System.err.println("Não há versão para este sistema operacional...");
+			
+		}
+			
 	}
 	
 }
